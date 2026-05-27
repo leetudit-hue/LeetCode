@@ -15,7 +15,7 @@ class Solution {
                 ans = n - 1000 +1;
             }
             else{
-                x = 99000+1;
+                ans = 99000+1;
             }
         }
         return ans;
