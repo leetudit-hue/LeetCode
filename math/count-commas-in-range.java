@@ -15,9 +15,7 @@ class Solution {
                 ans = n - 1000 +1;
             }
             else{
-                int x = n - 99999;
-                x-=1000;
-                return x+2;
+                x = 99000+1;
             }
         }
         return ans;
