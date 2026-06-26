@@ -10,19 +10,21 @@ class Solution {
         int ans = 0;
         int[]small = new int[26];
         int[]large = new int[26];
+        Arrays.fill(small,-1);
+        Arrays.fill(large,-1);
         for(int i = 0 ; i < n ; i++){
             char ch = word.charAt(i);
             if(check(ch)){
                 small[word.charAt(i)-'a'] = i;
             }
             else{
-                if(large[word.charAt(i)-'A'] == 0){
+                if(large[word.charAt(i)-'A'] == -1){
                     large[word.charAt(i)-'A'] = i;
                 }
             }
         }
-        for(int i = 0 ; i < n ; i++){
-            if(small[i]!=0 && large[i]!=0 && small[i]<large[i]){
+        for(int i = 0 ; i < 26 ; i++){
+            if(small[i]!=-1 && large[i]!=-1 && small[i]<large[i]){
                 ans++;
             }
         }

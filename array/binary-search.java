@@ -1,22 +1,14 @@
 class Solution {
-    public int binarySearch(int[]a,int t,int l ,int r){
-        int mid = l+(r-l)/2;
-        if(l > r){
+    static int binaryS(int[]arr,int target,int st ,int end){
+        if(st > end){
             return -1;
         }
-        if(a[mid] == t){
-            return mid;
-        }
-        else if(a[mid]>t){
-            return binarySearch(a,t,l,mid-1);
-        }
-        else{
-            return binarySearch(a,t,mid+1,r);
-        }
+        int mid = st+(end-st)/2;
+        if(arr[mid] == target) return mid;
+        else if(arr[mid]<target) return binaryS(arr,target,mid+1,end);
+        else return binaryS(arr,target,st,mid-1);
     }
     public int search(int[] nums, int target) {
-        int l = 0;
-        int r = nums.length - 1;
-        return binarySearch(nums,target,l,r);
+        return binaryS(nums,target,0,nums.length-1);
     }
 }
