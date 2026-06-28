@@ -1,22 +1,25 @@
 class Solution {
     public int[][] insert(int[][] intervals, int[] newInterval) {
-        int n = intervals.length;
-        int i = 0;
+        int[][]a = new int[intervals.length+1][2];
+        for(int i = 0; i < intervals.length ; i++){
+            a[i] = intervals[i];
+        }
+        a[a.length-1] = newInterval;
+        Arrays.sort(a,(x,y)->x[0]-y[0]);
         List<int[]>ans = new ArrayList<>();
-        while( i < n && intervals[i][1] < newInterval[0] ){
-            ans.add(intervals[i]);
-            i++;
+        int st = a[0][0];
+        int end = a[0][1];
+        for(int i = 1 ; i < a.length ; i++){
+            if(a[i][0]<=end){
+                end = Math.max(end,a[i][1]);
+            }
+            else{
+                ans.add(new int[]{st,end});
+                st = a[i][0];
+                end = a[i][1];
+            }
         }
-        while(i < n && intervals[i][0] <= newInterval[1]){
-            newInterval[0] = Math.min(intervals[i][0],newInterval[0]);
-            newInterval[1] = Math.max(intervals[i][1],newInterval[1]);
-            i++;
-        }
-        ans.add(newInterval);
-        while(i < n){
-            ans.add(intervals[i]);
-            i++;
-        }
+        ans.add(new int[]{st,end});
         return ans.toArray(new int[ans.size()][2]);
     }
 }
