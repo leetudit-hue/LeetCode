@@ -1,15 +1,15 @@
 class Solution {
     public List<String> summaryRanges(int[] nums) {
+        int n = nums.length;
         List<String>ans = new ArrayList<>();
         int i = 0;
-        int n = nums.length;
-        while(i < n ){
+        while(i < n){
             int start = nums[i];
-            while(i+1 < n && nums[i]+1 == nums[i+1]){
+            while(i+1 < n && nums[i+1] == nums[i]+1){
                 i++;
             }
-            if(nums[i] == start){
-                ans.add(String.valueOf(start));
+            if(start == nums[i]){
+                ans.add(nums[i]+"");
             }
             else{
                 ans.add(start+"->"+nums[i]);
