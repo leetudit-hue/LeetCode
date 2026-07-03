@@ -5,7 +5,7 @@ class Solution {
         int ans = Integer.MAX_VALUE;
         while(i <= n-k){
             int count = 0;
-            for(int j = i ; j < n ; j++){
+            for(int j = i ; j - i + 1 <= k; j++){
                 if(blocks.charAt(j) == 'W'){
                     count++;
                 }
@@ -13,6 +13,6 @@ class Solution {
             ans = Math.min(ans,count);
             i++;
         }
-        return ans-1;
+        return ans;
     }
 }
