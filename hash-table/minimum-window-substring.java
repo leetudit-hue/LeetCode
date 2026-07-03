@@ -19,10 +19,13 @@ class Solution {
             }
             map.put(ch,map.getOrDefault(ch,0)-1);
             while(req == 0){
-                st = i;
-                minWindowLength = Math.min(minWindowLength,j-i+1);
-                map.put(s.charAt(i),map.get(s.charAt(i))+1);
-                if(map.get(s.charAt(i))>0){
+                if (j - i + 1 < minWindowLength) {
+                    minWindowLength = j - i + 1;
+                    st = i;
+                }
+                char left = s.charAt(i);
+                map.put(left,map.getOrDefault(left,0)+1);
+                if(map.get(left) > 0){
                     req ++;
                 }
                 i++;
