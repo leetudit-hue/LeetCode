@@ -14,6 +14,7 @@ class Solution {
         return new long[]{x,sum};
     }
     public long sumAndMultiply(int n) {
+        if(n == 0) return 0;
         long[]num = fun(n);
         if(num[1] == 0 || num[0] == 0) return 0;
         return num[0] * num[1];
