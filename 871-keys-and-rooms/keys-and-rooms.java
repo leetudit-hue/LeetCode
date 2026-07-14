@@ -5,10 +5,12 @@ class Solution {
         vis[0] = true;
         while(q.size() > 0){
             int room = q.remove();
-            for(int i = 0 ; i < adj.get(room).size() ; i++){
-                if(! vis[adj.get(room).get(i)]){
-                    q.add(adj.get(room).get(i));
-                    vis[adj.get(room).get(i)] = true;
+            int size = adj.get(room).size();
+            for(int i = 0 ; i < size ; i++){
+                int neigh = adj.get(room).get(i);
+                if(!vis[neigh]){
+                    q.add(neigh);
+                    vis[neigh] = true;
                 }
             }
         }
