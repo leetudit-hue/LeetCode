@@ -1,11 +1,13 @@
 class Solution {
     public static int gcd(int a , int b){
-        while (b != 0) {
-            int temp = b;
-            b = a % b;
-            a = temp;
+        int n2 = Math.min(a , b);
+        int n1 = Math.max(a , b);
+        while(n1 % n2 != 0){
+            int rem = n1 % n2;
+            n1 = n2;
+            n2 = rem;
         }
-        return Math.abs(a);
+        return n2;
     }
     public long gcdSum(int[] nums) {
         int n = nums.length;
