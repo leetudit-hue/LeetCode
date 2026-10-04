@@ -1,23 +1,24 @@
 class Solution {
+    boolean check(StringBuilder sb){
+        HashSet<Character>st = new HashSet<>();
+        for(int i = 0 ; i < 3 ; i++){
+            if(st.contains(sb.charAt(i))) return false;
+            st.add(sb.charAt(i));
+        }
+        return true;
+    }
     public int countGoodSubstrings(String s) {
+        StringBuilder sb = new StringBuilder();
         int n = s.length();
+        int j = 0;
         int count = 0;
-        for(int i = 0 ; i < n-2 ; i++){
-            StringBuilder sb = new StringBuilder();
-            HashSet<Character>st = new HashSet<>();
-            for(int j = i ; j <= i+2 ; j++){
-                char ch = s.charAt(j);
-                sb.append(ch);
+        while(j < n){
+            sb.append(s.charAt(j));
+            j++;
+            if(sb.length() == 3){
+                if(check(sb)) count++;
+                sb.deleteCharAt(0);
             }
-            boolean good = true;
-            for(int k = 0 ; k < 3 ; k++){
-                if(st.contains(sb.charAt(k))){
-                    good = false;
-                    break;
-                }
-                st.add(sb.charAt(k));
-            }
-            if(good) count++;
         }
         return count;
     }
