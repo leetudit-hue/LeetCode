@@ -1,37 +1,37 @@
 class Solution {
-    int noOfDays(int[]w,int c){
-        int days = 1;
+    int noOfDays(int[]w , int cap){
+        int d = 1;
         int load = 0;
         for(int i = 0 ; i < w.length ; i++){
-            if(load + w[i] > c){
-                days++;
+            if(load + w[i] > cap){
+                d++;
                 load = w[i];
             }
             else{
                 load += w[i];
             }
         }
-        return days;
+        return d;
     }
     public int shipWithinDays(int[] weights, int days) {
-        int max = Integer.MIN_VALUE;
-        int sum = 0;
+        int l = -1;
+        int r = 0;
+        int ans = -1;
         for(int num : weights){
-            max = Math.max(max,num);
-            sum += num;
+            l = Math.max(l , num);
+            r += num;
         }
-        int low = max;
-        int high = sum;
-        while(low <= high){
-            int mid = low + (high - low)/2;
-            int day = noOfDays(weights,mid);
-            if(day <= days){
-                high = mid-1;
+        while(l <= r){
+            int mid = l + (r - l) / 2;
+            int dayss = noOfDays(weights , mid);
+            if(dayss <= days){
+                ans = mid;
+                r = mid - 1;
             }
             else{
-                low = mid+1;
+                l = mid + 1;
             }
         }
-        return low;
+        return ans;
     }
 }
