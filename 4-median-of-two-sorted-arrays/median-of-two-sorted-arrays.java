@@ -1,61 +1,31 @@
 class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        int n = nums1.length;
-        int m = nums2.length;
-        int el1 = Integer.MAX_VALUE;
-        int el2 = Integer.MAX_VALUE;
-        int k1 = (m+n)/2;
-        int k2 = (m+n)/2-1;
+        int n1 = nums1.length;
+        int n2 = nums2.length;
+        int temp[] = new int[n1 + n2];
         int i = 0;
         int j = 0;
         int idx = 0;
-        while(i < n && j < m){
-            if(nums1[i]<nums2[j]){
-                if(idx == k1){
-                    el1 = nums1[i];
-                }
-                if(idx == k2){
-                    el2 = nums1[i];
-                }
-                i++;
-            } 
+        while(i < n1 && j < n2){
+            if(nums1[i] < nums2[j]){
+                temp[idx++] = nums1[i++];
+            }
             else{
-                if(idx == k1){
-                    el1 = nums2[j];
-                }
-                if(idx == k2){
-                    el2 = nums2[j];
-                }
-                j++;
+                temp[idx++] = nums2[j++];
             }
-            idx++;
         }
-        while(i < n){
-            if(idx == k1){
-                el1 = nums1[i];
-            }
-            if(idx == k2){
-                el2 = nums1[i];
-            }
-            i++;
-            idx++;
+        while(i < n1){
+            temp[idx++] = nums1[i++];
         }
-        while(j < m){
-            if(idx == k1){
-                el1 = nums2[j];
-            }
-            if(idx == k2){
-                el2 = nums2[j];
-            }
-            j++;
-            idx++;
+        while(j < n2){
+            temp[idx++] = nums2[j++];
         }
-        int size = m+n;
-        if(size%2 != 0){
-            return el1;
+        int size = temp.length;
+        if(size % 2 != 0){
+            return (double)temp[size / 2];
         }
         else{
-            return (el1+el2)/2.0;
+            return (temp[size / 2] + temp[size / 2 - 1]) / 2.0;
         }
     }
 }
